@@ -1,3 +1,4 @@
 module.exports = {
-  TextModule: require('./TextModule.js')
+  TextModule: require('./TextModule.js'),
+  Icons: require('./icons')
 }
