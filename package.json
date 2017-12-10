@@ -1,0 +1,18 @@
+{
+  "name": "hooked",
+  "version": "1.0.0",
+  "description": "Connects services via wehhooks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "micro": "micro"
+  },
+  "author": "iamkevingreen",
+  "license": "MIT",
+  "dependencies": {
+    "contentful": "^5.0.5",
+    "micro": "^9.0.2",
+    "micro-post": "^1.0.0",
+    "shopify-api-node": "^2.10.0"
+  }
+}
