@@ -20,6 +20,9 @@ module.exports = (data) => {
     shopifyAPI.article.update(config.shopify.blogId, fields.articleId, {
       title: fields.passportTitle,
       body_html: createBlogPost,
+      // image: {
+      //   src: encodeURI(fields.featuredImage.fields.file.url + '?fm=jpg&fl=progressive')
+      // },
       author: fields.author
     })
     .then(res => `Pushed data to shopify!`)

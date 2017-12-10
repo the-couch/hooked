@@ -5,6 +5,15 @@ const {
   Email
 } = require('../components/icons')
 
+const RenderModules = require('../components/RenderModules')
+
+const MapModules = (modules) => {
+  return modules.map((module) => {
+    const type = module.sys.contentType ? module.sys.contentType.sys.id : false
+    return RenderModules(module, type)
+  })
+}
+
 module.exports = (data) => {
   console.log('building', data)
   return `
@@ -33,6 +42,16 @@ module.exports = (data) => {
       </div>
     </div>
   </section>
+  <div className='z0 bgw px2'>
+    ${MapModules(data.contentModules) }
+    <div className='outer pv2 container--c container--a'>
+      <div className='article__social_footer'>
+        <a href='#0' className='co social mr2' data-social='twitter'>${Twitter}</a>
+        <a href='#0' className='co social mr2' data-social='facebook'>${Facebook}</a>
+        <a className='co social' href='mailto?subject=${data.passportTitle}&body=https://www.woolandoak.com/blogs/passport/${data.slug}'>${Email}</a>
+      </div>
+    </div>
+  </div>
 </div>
   `
 }
