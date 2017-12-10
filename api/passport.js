@@ -2,6 +2,8 @@ const contentfulAPI = require('./contentful')
 const shopifyAPI = require('./shopify')
 const config = require('../config')
 
+const buildBlogPost = require('../layouts/article')
+
 module.exports = (data) => {
   const slug = data.fields.slug['en-US']
 
@@ -12,9 +14,12 @@ module.exports = (data) => {
   }).then(({ items }) => {
     const { fields } = items[0]
     // Example unique create
-    shopifyAPI.article.update(config.shopify.blogId, '527892493', {
+
+    const createBlogPost = buildBlogPost(fields)
+
+    shopifyAPI.article.update(config.shopify.blogId, fields.articleId, {
       title: fields.passportTitle,
-      body_html: `<p>${fields.previewDescription}</p>`,
+      body_html: createBlogPost,
       author: fields.author
     })
     .then(res => `Pushed data to shopify!`)
