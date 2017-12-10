@@ -5,6 +5,8 @@ const {
   Email
 } = require('../components/icons')
 
+const config = require('../config')
+
 const RenderModules = require('../components/RenderModules')
 
 const MapModules = (modules) => {
@@ -32,8 +34,8 @@ module.exports = (data) => {
               ${Arrow} Back
             </a>
           </div>
-          <a href='#0' className='co social mr1' data-social='twitter' data-url='https://www.woolandoak.com/blogs/passport/${data.slug}'>${Facebook}</a>
-          <a href='#0' className='co social mr1' data-social='facebook' data-url='https://www.woolandoak.com/blogs/passport/${data.slug}'>${Twitter}</a>
+          <a href='#0' className='co social mr1' data-social='twitter'>${Facebook}</a>
+          <a href='#0' className='co social mr1' data-social='facebook'>${Twitter}</a>
           <a className='co social' href='mailto?subject=${data.passportTitle}'>${Email}</a>
         </div>
       </div>
@@ -48,7 +50,7 @@ module.exports = (data) => {
       <div className='article__social_footer'>
         <a href='#0' className='co social mr2' data-social='twitter'>${Twitter}</a>
         <a href='#0' className='co social mr2' data-social='facebook'>${Facebook}</a>
-        <a className='co social' href='mailto?subject=${data.passportTitle}&body=https://www.woolandoak.com/blogs/passport/${data.slug}'>${Email}</a>
+        <a className='co social' href='mailto?subject=${data.passportTitle}&body=${config.shopify.shopURL + config.shopify.blogURL + data.slug}'>${Email}</a>
       </div>
     </div>
   </div>

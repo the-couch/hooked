@@ -7,6 +7,8 @@ module.exports = {
     shopName: '',
     apiKey: '',
     password: '',
-    blogId: ''
+    blogId: '',
+    shopURL: '',
+    blogURL: ''
   }
 }
