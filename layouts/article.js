@@ -17,7 +17,6 @@ const MapModules = (modules) => {
 }
 
 module.exports = (data) => {
-  console.log('building', data)
   return `
 <div class='single'>
   <div className='article__hero rel'>
