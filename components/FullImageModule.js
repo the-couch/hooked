@@ -1,3 +1,5 @@
+const Button = require('./Button')
+
 module.exports = (data) => {
   const {
     shopableReference
@@ -10,7 +12,11 @@ module.exports = (data) => {
 <div className='mha container--mm pv1 rel'>
   ${shopableReference ? `
     <div class='abs fit-x article__shopable'>
-      Shopable
+      ${Button({
+        cta: `Shop ${shopableReference.fields.productName}`,
+        url: `${url}`,
+        light: true
+      })}
     </div>
   ` : ''}
   <img src=${data.fields.image.fields.file.url} />

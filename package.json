@@ -10,6 +10,7 @@
   "author": "iamkevingreen",
   "license": "MIT",
   "dependencies": {
+    "classnames": "^2.2.5",
     "contentful": "^5.0.5",
     "marked": "^0.3.7",
     "micro": "^9.0.2",
