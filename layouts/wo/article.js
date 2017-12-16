@@ -3,11 +3,11 @@ const {
   Facebook,
   Twitter,
   Email
-} = require('../components/icons')
+} = require('../../components/icons')
 
-const config = require('../config')
+const config = require('../../config')
 
-const RenderModules = require('../components/RenderModules')
+const RenderModules = require('../../components/RenderModules')
 
 const MapModules = (modules) => {
   return modules.map((module) => {

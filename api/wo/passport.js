@@ -2,7 +2,7 @@ const contentfulAPI = require('./contentful')
 const shopifyAPI = require('./shopify')
 const config = require('../../config')
 
-const buildBlogPost = require('../../layouts/article')
+const buildBlogPost = require('../../layouts/wo/article')
 
 module.exports = (data) => {
   const slug = data.fields.slug['en-US']
