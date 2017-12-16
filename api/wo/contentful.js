@@ -1,5 +1,5 @@
 const { createClient } = require('contentful')
-const config = require('../config')
+const config = require('../../config')
 
 module.exports = createClient({
   space: config.contentful.space,

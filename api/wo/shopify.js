@@ -1,5 +1,5 @@
 const Shopify = require('shopify-api-node')
-const config = require('../config')
+const config = require('../../config')
 
 module.exports = new Shopify({
   shopName: config.shopify.shopName,
