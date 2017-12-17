@@ -18,11 +18,8 @@ module.exports = (data) => {
     const { fields } = items[0]
     // Example unique create
 
-    console.log(clean(fields))
-
     // Check if it's the homepage and push data into a meta field
     if (slug === 'home') {
-      console.log("sup i'm the homepage")
       shopifyAPI.metafield.list({
         owner_resource: 'shop',
         owner_id: '24846718'
@@ -31,11 +28,10 @@ module.exports = (data) => {
           // Loop through response and see if fancy_content is present
           res.forEach((singleMeta) => {
             if (singleMeta.key === 'fancy_content') {
-              console.log('fancy content exists')
-              // console.log(CircularJSON.stringify(fields))
-              // shopifyAPI.metafield.update(singleMeta.id, {
-              //   value: CircularJSON.stringify(fields)
-              // }).then(res => console.log('updated meta', res))
+
+              shopifyAPI.metafield.update(singleMeta.id, {
+                value: CircularJSON.stringify(clean(fields))
+              }).then(res => console.log('updated meta', res))
             }
           })
         }
