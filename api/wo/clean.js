@@ -10,16 +10,21 @@ module.exports = (parsed) => {
   parsed.modules.forEach((module) => {
     // console.log('module spaghetti', module)
     let cleanModule = {}
+    let images = []
+    let productcta = []
+    let icons = []
+    let links = []
+    let values = []
+    let slides = []
+    let logos = []
     switch (module.sys.contentType.sys.id) {
       case 'moduleLargeHero':
-        let images = []
         module.fields.images.forEach((image) => {
           let cleanImage = {
             fields: image.fields
           }
           images.push(cleanImage)
         })
-        let productcta = []
         module.fields.productcta.forEach((cta) => {
           let cleanCta = {
             sys: {
@@ -38,6 +43,13 @@ module.exports = (parsed) => {
           productcta.push(cleanCta)
         })
         cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleLargeHero'
+              }
+            }
+          },
           fields: {
             images: images,
             title: module.fields.title,
@@ -48,20 +60,77 @@ module.exports = (parsed) => {
         cleanModules.push(cleanModule)
         break;
       case 'moduleCta':
+        let linkObject = null
+        if (module.fields.link) {
+          linkObject = Object.assign({}, linkObject, {
+            sys: {
+              contentType: {
+                sys: {
+                  id: module.fields.link.sys.contentType.sys.id
+                }
+              }
+            },
+            fields: {
+              slug: module.fields.link.fields.slug
+            }
+          })
+        }
         cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleCta'
+              }
+            }
+          },
           fields: {
             content: module.fields.content,
             textStyle: module.fields.textStyle,
-            backgroundImage: [],
+            alignment: module.fields.alignment,
+            backgroundImage: {
+              fields: {
+                file: {
+                  url: module.fields.backgroundImage.fields.file.url
+                }
+              }
+            },
             linkText: module.fields.linkText,
-            link: [],
+            link: linkObject,
             buttonVisibility: module.fields.buttonVisibility
           }
         })
         cleanModules.push(cleanModule)
         break;
       case 'moduleStopMotion':
+        module.fields.slideshowImages.forEach((image) => {
+          let cleanImage = {
+            fields: image.fields
+          }
+          images.push(cleanImage)
+        })
+        module.fields.productIcons.forEach((icon) => {
+          let cleaIcon = {
+            fields: {
+              title: icon.fields.title,
+              whiteIcon: {
+                fields: {
+                  file: {
+                    url: icon.fields.whiteIcon.fields.file.url
+                  }
+                }
+              }
+            }
+          }
+          icons.push(cleanIcon)
+        })
         cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleStopMotion'
+              }
+            }
+          },
           fields: {
             productName: module.fields.productName,
             productDescription: module.fields.productDescription,
@@ -71,9 +140,9 @@ module.exports = (parsed) => {
                 slug: module.fields.productLink.fields.slug
               }
             },
-            slideshowImages: [],
+            slideshowImages: images,
             alignment: module.fields.alignment,
-            productIcons: [],
+            productIcons: icons,
             stopMotionImage: {
               fields: {
                 file: {
@@ -87,6 +156,78 @@ module.exports = (parsed) => {
         })
         cleanModules.push(cleanModule)
         break;
+      case 'moduleCoreValues':
+        module.fields.value.forEach((val) => {
+          let cleanValue = {
+            fields: {
+              content: val.fields.content,
+              header: val.fields.header,
+              icon: {
+                fields: {
+                  blueIcon: {
+                    fields: {
+                      file: {
+                        url: val.fields.icon.fields.blueIcon.fields.file.url
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          icons.push(cleanValue)
+        })
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleCoreValues'
+              }
+            }
+          },
+          fields: {
+            title: module.fields.title,
+            value: icons
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
+      // case 'moduleSlideshow':
+      //   if (module.fields.companyLogo) {
+      //     module.fields.companyLogo.forEach((logo) => {
+      //       let cleanCompany = {
+      //         fields: {
+      //           file: {
+      //             url: logo.fields.file.url
+      //           }
+      //         }
+      //       }
+      //       logos.push(cleanCompany)
+      //     })
+      //   }
+      //   module.fields.slide.forEach((single) => {
+      //     let cleanSlide = {
+      //       fields: {
+      //         productLink: {
+      //           fields: {
+      //             slug: single.fields.productLink.fields.slug
+      //           }
+      //         },
+      //         quote: single.fields.quote,
+      //         personName: single.fields.personName
+      //       }
+      //     }
+      //     slides.push(cleanSlide)
+      //   })
+      //   cleanModule = Object.assign({}, cleanModule, {
+      //     fields: {
+      //       helpfulText: module.fields.helpfulText,
+      //       slide: slides,
+      //       companyLogo: logos
+      //     }
+      //   })
+      //   cleanModules.push(cleanModule)
+      //   break;
     }
   })
   cleanObject = Object.assign({}, cleanObject, {

@@ -22,7 +22,7 @@ module.exports = (data) => {
     if (slug === 'home') {
       shopifyAPI.metafield.list({
         owner_resource: 'shop',
-        owner_id: '24846718'
+        owner_id: '11821216'
       }).then(
         res => {
           // Loop through response and see if fancy_content is present
@@ -30,12 +30,19 @@ module.exports = (data) => {
             if (singleMeta.key === 'fancy_content') {
 
               shopifyAPI.metafield.update(singleMeta.id, {
-                value: CircularJSON.stringify(clean(fields))
+                value: JSON.stringify(clean(fields))
               }).then(res => console.log('updated meta', res))
             }
           })
         }
       )
+      // init data
+      // shopifyAPI.metafield.create({
+      //   key: 'fancy_content',
+      //   value: 'init data',
+      //   namespace: 'data',
+      //   value_type: 'string'
+      // }).then(res => console.log(res))
     }
 
     // const createBlogPost = buildBlogPost(fields)
