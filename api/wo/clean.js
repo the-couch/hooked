@@ -109,7 +109,7 @@ module.exports = (parsed) => {
           images.push(cleanImage)
         })
         module.fields.productIcons.forEach((icon) => {
-          let cleaIcon = {
+          let cleanIcon = {
             fields: {
               title: icon.fields.title,
               whiteIcon: {
