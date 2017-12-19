@@ -16,10 +16,20 @@ module.exports = (parsed) => {
     let links = []
     let values = []
     let slides = []
+    let variants = []
     let logos = []
     let products = []
     switch (module.sys.contentType.sys.id) {
       case 'mdouleProductGrid':
+        module.fields.variants.forEach((variant) => {
+          let cleanVariant = {
+            fields: {
+              variantDiscountedPrice: variant.fields.variantDiscountedPrice,
+              variantPrice: variant.fields.variantPrice
+            }
+          }
+          varaints.push(cleanVariant)
+        })
         module.fields.products.forEach((product) => {
           product.fields.image.forEach((image) => {
             let cleanImage = {
@@ -34,8 +44,12 @@ module.exports = (parsed) => {
           let cleanProduct = {
             slug: product.fields.slug,
             productName: product.fields.productName,
-            image: images
+            productShortDescription: product.fields.productShortDescription,
+            productSubheader: product.fields.productSubheader,
+            image: images,
+            variants: variants
           }
+          products.push(cleanProduct)
         })
         cleanModule = Object.assign({}, cleanModule, {
           sys: {
@@ -46,7 +60,8 @@ module.exports = (parsed) => {
             }
           },
           fields: {
-            gridType: module.fields.gridType
+            gridType: module.fields.gridType,
+            products: products
           }
         })
         break;
