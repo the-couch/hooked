@@ -11,7 +11,7 @@
 //   }
 // })
 
-
+require('now-env')
 const updatePassports = require('./api/wo/passport')
 const updatePages = require('./api/wo/pages')
 

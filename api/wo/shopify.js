@@ -1,8 +1,7 @@
 const Shopify = require('shopify-api-node')
-const config = require('../../config')
 
 module.exports = new Shopify({
-  shopName: config.shopify.shopName,
-  apiKey: config.shopify.apiKey,
-  password: config.shopify.password
+  shopName: process.env.SHOPIFY_SHOPNAME,
+  apiKey: process.env.SHOPIFY_APIKEY,
+  password: process.env.SHOPIFY_PASSWORD
 })

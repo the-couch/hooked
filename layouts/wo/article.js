@@ -5,8 +5,6 @@ const {
   Email
 } = require('../../components/icons')
 
-const config = require('../../config')
-
 const RenderModules = require('../../components/RenderModules')
 
 const MapModules = (modules) => {
@@ -49,7 +47,6 @@ module.exports = (data) => {
       <div className='article__social_footer'>
         <a href='#0' className='co social mr2' data-social='twitter'>${Twitter}</a>
         <a href='#0' className='co social mr2' data-social='facebook'>${Facebook}</a>
-        <a className='co social' href='mailto?subject=${data.passportTitle}&body=${config.shopify.shopURL + config.shopify.blogURL + data.slug}'>${Email}</a>
       </div>
     </div>
   </div>

@@ -1,7 +1,6 @@
 const CircularJSON = require('circular-json');
 const contentfulAPI = require('./contentful')
 const shopifyAPI = require('./shopify')
-const config = require('../../config')
 
 const clean = require('./clean')
 
@@ -18,31 +17,37 @@ module.exports = (data) => {
     const { fields } = items[0]
     // Example unique create
 
-    // Check if it's the homepage and push data into a meta field
-    if (slug === 'home') {
-      shopifyAPI.metafield.list({
-        owner_resource: 'shop',
-        owner_id: '11821216'
-      }).then(
-        res => {
-          // Loop through response and see if fancy_content is present
-          res.forEach((singleMeta) => {
-            if (singleMeta.key === 'fancy_content') {
+    switch (slug) {
+      case 'home':
+        shopifyAPI.metafield.list({
+          owner_resource: 'shop',
+          owner_id: '11821216'
+        }).then(
+          res => {
+            // Loop through response and see if fancy_content is present
+            res.forEach((singleMeta) => {
+              if (singleMeta.key === 'fancy_content') {
 
-              shopifyAPI.metafield.update(singleMeta.id, {
-                value: JSON.stringify(clean(fields))
-              }).then(res => console.log('updated meta', res))
-            }
-          })
-        }
-      )
-      // init data
-      // shopifyAPI.metafield.create({
-      //   key: 'fancy_content',
-      //   value: 'init data',
-      //   namespace: 'data',
-      //   value_type: 'string'
-      // }).then(res => console.log(res))
+                shopifyAPI.metafield.update(singleMeta.id, {
+                  value: JSON.stringify(clean(fields))
+                }).then(res => console.log('updated meta', res))
+              }
+            })
+          }
+        )
+        // init data
+        // shopifyAPI.metafield.create({
+        //   key: 'fancy_content',
+        //   value: 'init data',
+        //   namespace: 'data',
+        //   value_type: 'string'
+        // }).then(res => console.log(res))
+        break;
+      case 'collections':
+        console.log('hey collections')
+        console.log('probably need to do some cleaning', clean(fields))
+        // Shopify.page.update()
+        break;
     }
 
     // const createBlogPost = buildBlogPost(fields)

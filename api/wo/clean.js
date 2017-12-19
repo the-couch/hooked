@@ -17,7 +17,39 @@ module.exports = (parsed) => {
     let values = []
     let slides = []
     let logos = []
+    let products = []
     switch (module.sys.contentType.sys.id) {
+      case 'mdouleProductGrid':
+        module.fields.products.forEach((product) => {
+          product.fields.image.forEach((image) => {
+            let cleanImage = {
+              fields: {
+                file: {
+                  url: image.fields.file.url
+                }
+              }
+            }
+            images.push(cleanImage)
+          })
+          let cleanProduct = {
+            slug: product.fields.slug,
+            productName: product.fields.productName,
+            image: images
+          }
+        })
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleProductGrid'
+              }
+            }
+          },
+          fields: {
+            gridType: module.fields.gridType
+          }
+        })
+        break;
       case 'moduleLargeHero':
         module.fields.images.forEach((image) => {
           let cleanImage = {
