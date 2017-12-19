@@ -44,9 +44,14 @@ module.exports = (data) => {
         // }).then(res => console.log(res))
         break;
       case 'collections':
-        console.log('hey collections')
-        console.log('probably need to do some cleaning', clean(fields))
-        // Shopify.page.update()
+        // console.log('hey collections')
+        // console.log('probably need to do some cleaning', clean(fields))
+        shopifyAPI.page.update('804192269', {
+          id: '804192269',
+          body_html: JSON.stringify(clean(fields))
+        })
+        // .then(res => console.log('we did it', res))
+        .catch(err => console.error(err))
         break;
     }
 

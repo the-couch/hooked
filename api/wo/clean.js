@@ -10,27 +10,18 @@ module.exports = (parsed) => {
   parsed.modules.forEach((module) => {
     // console.log('module spaghetti', module)
     let cleanModule = {}
-    let images = []
     let productcta = []
     let icons = []
     let links = []
     let values = []
     let slides = []
-    let variants = []
     let logos = []
     let products = []
     switch (module.sys.contentType.sys.id) {
-      case 'mdouleProductGrid':
-        module.fields.variants.forEach((variant) => {
-          let cleanVariant = {
-            fields: {
-              variantDiscountedPrice: variant.fields.variantDiscountedPrice,
-              variantPrice: variant.fields.variantPrice
-            }
-          }
-          varaints.push(cleanVariant)
-        })
+      case 'moduleProductGrid':
         module.fields.products.forEach((product) => {
+          let images = []
+          let variants = []
           product.fields.image.forEach((image) => {
             let cleanImage = {
               fields: {
@@ -41,14 +32,25 @@ module.exports = (parsed) => {
             }
             images.push(cleanImage)
           })
+          product.fields.variants.forEach((variant) => {
+            let cleanVariant = {
+              fields: {
+                variantDiscountedPrice: variant.fields.variantDiscountedPrice,
+                variantPrice: variant.fields.variantPrice
+              }
+            }
+            variants.push(cleanVariant)
+          })
           let cleanProduct = {
             slug: product.fields.slug,
             productName: product.fields.productName,
             productShortDescription: product.fields.productShortDescription,
+            collectionHover: product.fields.collectionHover,
             productSubheader: product.fields.productSubheader,
             image: images,
             variants: variants
           }
+          console.log('this is the clean product?', cleanProduct)
           products.push(cleanProduct)
         })
         cleanModule = Object.assign({}, cleanModule, {
@@ -61,9 +63,11 @@ module.exports = (parsed) => {
           },
           fields: {
             gridType: module.fields.gridType,
+            videoModule: module.fields.videoModule,
             products: products
           }
         })
+        cleanModules.push(cleanModule)
         break;
       case 'moduleLargeHero':
         module.fields.images.forEach((image) => {
@@ -280,6 +284,5 @@ module.exports = (parsed) => {
   cleanObject = Object.assign({}, cleanObject, {
     modules: cleanModules
   })
-  console.log('cleaned up baby', cleanObject)
   return cleanObject
 }
