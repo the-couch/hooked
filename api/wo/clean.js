@@ -70,6 +70,7 @@ module.exports = (parsed) => {
         cleanModules.push(cleanModule)
         break;
       case 'moduleLargeHero':
+        let images = []
         module.fields.images.forEach((image) => {
           let cleanImage = {
             fields: image.fields
@@ -153,11 +154,12 @@ module.exports = (parsed) => {
         cleanModules.push(cleanModule)
         break;
       case 'moduleStopMotion':
+        let stopimages = []
         module.fields.slideshowImages.forEach((image) => {
           let cleanImage = {
             fields: image.fields
           }
-          images.push(cleanImage)
+          stopimages.push(cleanImage)
         })
         module.fields.productIcons.forEach((icon) => {
           let cleanIcon = {
@@ -191,7 +193,7 @@ module.exports = (parsed) => {
                 slug: module.fields.productLink.fields.slug
               }
             },
-            slideshowImages: images,
+            slideshowImages: stopimages,
             alignment: module.fields.alignment,
             productIcons: icons,
             stopMotionImage: {
@@ -243,42 +245,50 @@ module.exports = (parsed) => {
         })
         cleanModules.push(cleanModule)
         break;
-      // case 'moduleSlideshow':
-      //   if (module.fields.companyLogo) {
-      //     module.fields.companyLogo.forEach((logo) => {
-      //       let cleanCompany = {
-      //         fields: {
-      //           file: {
-      //             url: logo.fields.file.url
-      //           }
-      //         }
-      //       }
-      //       logos.push(cleanCompany)
-      //     })
-      //   }
-      //   module.fields.slide.forEach((single) => {
-      //     let cleanSlide = {
-      //       fields: {
-      //         productLink: {
-      //           fields: {
-      //             slug: single.fields.productLink.fields.slug
-      //           }
-      //         },
-      //         quote: single.fields.quote,
-      //         personName: single.fields.personName
-      //       }
-      //     }
-      //     slides.push(cleanSlide)
-      //   })
-      //   cleanModule = Object.assign({}, cleanModule, {
-      //     fields: {
-      //       helpfulText: module.fields.helpfulText,
-      //       slide: slides,
-      //       companyLogo: logos
-      //     }
-      //   })
-      //   cleanModules.push(cleanModule)
-      //   break;
+      case 'moduleSlideshow':
+        if (module.fields.companyLogo) {
+          module.fields.companyLogo.forEach((logo) => {
+            let cleanCompany = {
+              fields: {
+                file: {
+                  url: logo.fields.file.url
+                }
+              }
+            }
+            logos.push(cleanCompany)
+          })
+        }
+        module.fields.slide.forEach((single) => {
+          let cleanSlide = {
+            fields: {
+              productLink: {
+                fields: {
+                  slug: single.fields.productLink.fields.slug,
+                  productName: single.fields.productLink.fields.productName
+                }
+              },
+              quote: single.fields.quote,
+              personName: single.fields.personName
+            }
+          }
+          slides.push(cleanSlide)
+        })
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleSlideshow'
+              }
+            }
+          },
+          fields: {
+            helpfulText: module.fields.helpfulText,
+            slide: slides,
+            companyLogo: logos
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
     }
   })
   cleanObject = Object.assign({}, cleanObject, {
