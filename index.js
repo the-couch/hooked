@@ -18,19 +18,21 @@ const updatePages = require('./api/wo/pages')
 const micro = require('micro')
 const Router = require('micro-http-router')
 
+const landing = require('./layouts/landing')
+
 const router = new Router()
 
 router.route({
   path: '/',
   method: 'GET',
   handler: (req, res) => {
-    return 'Hooked'
+    return landing
   }
 })
 
 router.post('/api/wo', async (req, res) => {
   const parsed = await micro.json(req)
-  console.log(parsed.sys.contentType.sys.id)
+  // console.log(parsed.sys.contentType.sys.id)
 
   switch (parsed.sys.contentType.sys.id) {
     case 'singlePage':
