@@ -1,6 +1,6 @@
 ## Hooked
 
-[https://medium.com/the-couch/building-a-shopify-blog-with-contentful-d55ec2d32973](Medium Article about Building a Contentful powered Shopify Blog)
+[Medium Article about Building a Contentful powered Shopify Blog](https://medium.com/the-couch/building-a-shopify-blog-with-contentful-d55ec2d32973)
 
 A starter repo for running your own microservice to keep data beteween Contentful and Shopify in sync. This repo will showcase examples of syncing articles, pages, and products.
 

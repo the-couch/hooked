@@ -37,7 +37,8 @@ module.exports = (
         </h2>
         <div class='content'>
           <p><strong>What is it?</strong></p>
-          <p>A simple webhook service that maps data from Contentful to Shopify. This service runs as a middleman waiting for content updates in Contentful. We listen to on publish event changes in order to push json data back into various Shopify sites.</p>
+          <p>A simple webhook service that maps data from Contentful to Shopify. This service runs as a middleman
+            waiting for content updates in Contentful. We listen to on publish events in order to push json data back into various Shopify sites.</p>
           <p><strong>Whos using it?</strong></p>
           <p>I made this repo public in order to allow other people to implement this type of service
             as well as to replicate it or at least learn from the concept. I believe metafields in
@@ -49,6 +50,14 @@ module.exports = (
             You will of course be able to see exactly what we're doing. You can also read the <a href="https://medium.com/the-couch/building-a-shopify-blog-with-contentful-d55ec2d32973">Medium article</a>
             about how to create a contentful powered blog experience.</p>
           <p><a href="https://woolandoak.com">Wool &amp; Oak</a></p>
+        </div>
+        <div class='content'>
+          <p><strong>Content Delivery API</strong></p>
+          <p>You'll also notice that just listening to the webhook isn't enough in terms of pulling data from Contentful.
+            The returned data Contentful sends via a webhook is fairly limited and depending on the complexity of your site
+            you'll most likely want to use the initial webhook request to gather the minimal information and then use
+            the <a href="https://www.npmjs.com/package/contentful">Contentful NPM package</a> to actually pull the nested content (in our case content within referenced modules).
+          </p>
         </div>
         <div class='content'>
           <p>Created by <a href="http://districtdomain.com">Kevin Green</a> and utilized by <a href="https://thecouch.nyc">The Couch</a></p>
