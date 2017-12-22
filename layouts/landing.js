@@ -42,8 +42,8 @@ module.exports = (
           <p>I made this repo public in order to allow other people to implement this type of service
             as well as to replicate it or at least learn from the concept. I believe metafields in
             Shopify still have a long way to come and the editors that exist currently leave a lot to
-            be improved on. I services like Contentful and Prismic are a lot more robust and user friendly
-            in terms of content production and allows for a more hybrid experience.</p>
+            be improved on. I think services like Contentful and Prismic are a lot more robust and user friendly
+            in terms of content production and allows for a better production experience.</p>
           <p>Currently this repo powers a connection for one of these hybrid sites, I will add
             to the list of sites that are using this as we continue to build unique Shopify experiences.
             You will of course be able to see exactly what we're doing. You can also read the <a href="https://medium.com/the-couch/building-a-shopify-blog-with-contentful-d55ec2d32973">Medium article</a>
