@@ -39,7 +39,7 @@ module.exports = (
           <p><strong>What is it?</strong></p>
           <p>A simple webhook service that maps data from Contentful to Shopify. This service runs as a middleman
             waiting for content updates in Contentful. We listen to on publish events in order to push json data back into various Shopify sites.</p>
-          <p><strong>Whos using it?</strong></p>
+          <p><strong>Who's using it?</strong></p>
           <p>I made this repo public in order to allow other people to implement this type of service
             as well as to replicate it or at least learn from the concept. I believe metafields in
             Shopify still have a long way to come and the editors that exist currently leave a lot to

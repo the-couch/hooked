@@ -36,7 +36,10 @@ module.exports = (parsed) => {
             let cleanVariant = {
               fields: {
                 variantDiscountedPrice: variant.fields.variantDiscountedPrice,
-                variantPrice: variant.fields.variantPrice
+                variantPrice: variant.fields.variantPrice,
+                variantCLPImage: variant.fields.clpLandingImage,
+                variantCLPHover: variant.fields.clpLandingHoverImage,
+                material: variant.fields.material
               }
             }
             variants.push(cleanVariant)
