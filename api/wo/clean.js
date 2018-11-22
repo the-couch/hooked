@@ -66,12 +66,14 @@ module.exports = (parsed) => {
           },
           fields: {
             gridType: module.fields.gridType,
+            title: module.fields.title,
+            slug: module.fields.slug,
             videoModule: module.fields.videoModule,
             products: products
           }
         })
         cleanModules.push(cleanModule)
-        break;
+        break
       case 'moduleLargeHero':
         let images = []
         module.fields.images.forEach((image) => {
@@ -113,7 +115,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break;
+        break
       case 'moduleCta':
         let linkObject = null
         if (module.fields.link) {
@@ -155,7 +157,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break;
+        break
       case 'moduleStopMotion':
         let stopimages = []
         module.fields.slideshowImages.forEach((image) => {
@@ -211,7 +213,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break;
+        break
       case 'moduleCoreValues':
         module.fields.value.forEach((val) => {
           let cleanValue = {
@@ -247,7 +249,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break;
+        break
       case 'moduleSlideshow':
         if (module.fields.companyLogo) {
           module.fields.companyLogo.forEach((logo) => {
@@ -291,7 +293,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break;
+        break
     }
   })
   cleanObject = Object.assign({}, cleanObject, {
