@@ -14,6 +14,7 @@ module.exports = (parsed) => {
     let icons = []
     let links = []
     let values = []
+    let singleRows = []
     let slides = []
     let logos = []
     let products = []
@@ -266,6 +267,51 @@ module.exports = (parsed) => {
           fields: {
             title: module.fields.title,
             value: icons
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
+      case 'moduleVideoText':
+        module.fields.singleRow.forEach((row) => {
+          let cleanSingleRow = {
+            fields: {
+              imageFallback: {
+                fields: {
+                  file: {
+                    url: row.fields.imageFallback.fields.file.url
+                  }
+                }
+              },
+              video: row.fields.video,
+              videoUrl: row.fields.videoUrl,
+              text: row.fields.text,
+              alignment: row.fields.alignment,
+              icon: {
+                fields: {
+                  blueIcon: {
+                    fields: {
+                      file: {
+                        url: row.fields.icon.fields.blueIcon.fields.file.url
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          singleRows.push(cleanSingleRow)
+        })
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleVideoText'
+              }
+            }
+          },
+          fields: {
+            helpfulTitle: module.fields.helpfulTitle,
+            singleRow: singleRows
           }
         })
         cleanModules.push(cleanModule)
