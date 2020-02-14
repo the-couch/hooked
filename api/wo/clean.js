@@ -124,7 +124,13 @@ module.exports = (parsed) => {
             }
           },
           fields: {
-            image: module.fields.image,
+            image: {
+              fields: {
+                file: {
+                  url: module.fields.image.fields.file.url
+                }
+              }
+            },
             title: module.fields.title
           }
         })
