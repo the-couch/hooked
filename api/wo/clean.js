@@ -15,6 +15,7 @@ module.exports = (parsed) => {
     let links = []
     let values = []
     let singleRows = []
+    let highlights = []
     let slides = []
     let logos = []
     let products = []
@@ -312,6 +313,39 @@ module.exports = (parsed) => {
           fields: {
             helpfulTitle: module.fields.helpfulTitle,
             singleRow: singleRows
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
+      case 'moduleFeatureHighlights':
+        module.fields.featureHighlights.forEach((highlight) => {
+          let cleanHighlight = {
+            fields: {
+              image: {
+                fields: {
+                  file: {
+                    url: highlight.fields.image.fields.file.url
+                  }
+                }
+              },
+              video: highlight.fields.video,
+              title: highlight.fields.title,
+              description: highlight.fields.description
+            }
+          }
+          highlights.push(cleanHighlight)
+        })
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleFeatureHighlights'
+              }
+            }
+          },
+          fields: {
+            helpfulTitle: module.fields.helpfulTitle,
+            featureHighlights: highlights
           }
         })
         cleanModules.push(cleanModule)
