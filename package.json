@@ -23,7 +23,7 @@
     "nodemon": "^1.13.3",
     "now-env": "^3.0.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.2.1",
     "shopify-api-node": "^2.10.0"
   }
 }
