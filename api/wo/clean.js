@@ -114,6 +114,22 @@ module.exports = (parsed) => {
         })
         cleanModules.push(cleanModule)
         break;
+      case 'moduleMediumHero':
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleMediumHero'
+              }
+            }
+          },
+          fields: {
+            image: module.fields.image,
+            title: module.fields.title
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
       case 'moduleCta':
         let linkObject = null
         if (module.fields.link) {
