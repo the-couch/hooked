@@ -14,6 +14,8 @@ module.exports = (parsed) => {
     let icons = []
     let links = []
     let values = []
+    let singleRows = []
+    let highlights = []
     let slides = []
     let logos = []
     let products = []
@@ -66,14 +68,12 @@ module.exports = (parsed) => {
           },
           fields: {
             gridType: module.fields.gridType,
-            title: module.fields.title,
-            slug: module.fields.slug,
             videoModule: module.fields.videoModule,
             products: products
           }
         })
         cleanModules.push(cleanModule)
-        break
+        break;
       case 'moduleLargeHero':
         let images = []
         module.fields.images.forEach((image) => {
@@ -115,7 +115,29 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break
+        break;
+      case 'moduleMediumHero':
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleMediumHero'
+              }
+            }
+          },
+          fields: {
+            image: {
+              fields: {
+                file: {
+                  url: module.fields.image.fields.file.url
+                }
+              }
+            },
+            title: module.fields.title
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
       case 'moduleCta':
         let linkObject = null
         if (module.fields.link) {
@@ -157,7 +179,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break
+        break;
       case 'moduleStopMotion':
         let stopimages = []
         module.fields.slideshowImages.forEach((image) => {
@@ -213,7 +235,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break
+        break;
       case 'moduleCoreValues':
         module.fields.value.forEach((val) => {
           let cleanValue = {
@@ -249,7 +271,85 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break
+        break;
+      case 'moduleVideoText':
+        module.fields.singleRow.forEach((row) => {
+          let cleanSingleRow = {
+            fields: {
+              imageFallback: {
+                fields: {
+                  file: {
+                    url: row.fields.imageFallback.fields.file.url
+                  }
+                }
+              },
+              video: row.fields.video,
+              videoUrl: row.fields.videoUrl,
+              text: row.fields.text,
+              alignment: row.fields.alignment,
+              icon: {
+                fields: {
+                  blueIcon: {
+                    fields: {
+                      file: {
+                        url: row.fields.icon.fields.blueIcon.fields.file.url
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          singleRows.push(cleanSingleRow)
+        })
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleVideoText'
+              }
+            }
+          },
+          fields: {
+            helpfulTitle: module.fields.helpfulTitle,
+            singleRow: singleRows
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
+      case 'moduleFeatureHighlights':
+        module.fields.featureHighlights.forEach((highlight) => {
+          let cleanHighlight = {
+            fields: {
+              image: {
+                fields: {
+                  file: {
+                    url: highlight.fields.image.fields.file.url
+                  }
+                }
+              },
+              video: highlight.fields.video,
+              title: highlight.fields.title,
+              description: highlight.fields.description
+            }
+          }
+          highlights.push(cleanHighlight)
+        })
+        cleanModule = Object.assign({}, cleanModule, {
+          sys: {
+            contentType: {
+              sys: {
+                id: 'moduleFeatureHighlights'
+              }
+            }
+          },
+          fields: {
+            helpfulTitle: module.fields.helpfulTitle,
+            featureHighlights: highlights
+          }
+        })
+        cleanModules.push(cleanModule)
+        break;
       case 'moduleSlideshow':
         if (module.fields.companyLogo) {
           module.fields.companyLogo.forEach((logo) => {
@@ -293,7 +393,7 @@ module.exports = (parsed) => {
           }
         })
         cleanModules.push(cleanModule)
-        break
+        break;
     }
   })
   cleanObject = Object.assign({}, cleanObject, {
