@@ -27,7 +27,6 @@ module.exports = (data) => {
             // Loop through response and see if fancy_content is present
             res.forEach((singleMeta) => {
               if (singleMeta.key === 'fancy_content') {
-
                 shopifyAPI.metafield.update(singleMeta.id, {
                   value: JSON.stringify(clean(fields))
                 }).then(res => console.log('updated meta', res))

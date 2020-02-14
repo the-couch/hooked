@@ -82,23 +82,26 @@ module.exports = (parsed) => {
           }
           images.push(cleanImage)
         })
-        module.fields.productcta.forEach((cta) => {
-          let cleanCta = {
-            sys: {
-              contentType: {
-                sys: {
-                  id: cta.sys.contentType.sys.id
+        console.log('module.fields', module.fields)
+        if (module.fields.productcta) {
+          module.fields.productcta.forEach((cta) => {
+            let cleanCta = {
+              sys: {
+                contentType: {
+                  sys: {
+                    id: cta.sys.contentType.sys.id
+                  }
                 }
+              },
+              fields: {
+                slug: cta.fields.slug,
+                productName: cta.fields.productName,
+                ctaTitle: cta.fields.ctaTitle
               }
-            },
-            fields: {
-              slug: cta.fields.slug,
-              productName: cta.fields.productName,
-              ctaTitle: cta.fields.ctaTitle
             }
-          }
-          productcta.push(cleanCta)
-        })
+            productcta.push(cleanCta)
+          })
+        }
         cleanModule = Object.assign({}, cleanModule, {
           sys: {
             contentType: {
@@ -279,7 +282,7 @@ module.exports = (parsed) => {
               imageFallback: {
                 fields: {
                   file: {
-                    url: row.fields.imageFallback.fields.file.url
+                    url: row.fields.imageFallback ? row.fields.imageFallback.fields.file.url : null
                   }
                 }
               },
@@ -292,7 +295,7 @@ module.exports = (parsed) => {
                   blueIcon: {
                     fields: {
                       file: {
-                        url: row.fields.icon.fields.blueIcon.fields.file.url
+                        url: row.fields.icon ? row.fields.icon.fields.blueIcon.fields.file.url : null
                       }
                     }
                   }
@@ -318,7 +321,7 @@ module.exports = (parsed) => {
         cleanModules.push(cleanModule)
         break;
       case 'moduleFeatureHighlights':
-        module.fields.featureHighlights.forEach((highlight) => {
+        module.fields.highlight.forEach((highlight) => {
           let cleanHighlight = {
             fields: {
               image: {
