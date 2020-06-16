@@ -65,6 +65,7 @@ module.exports = (parsed) => {
             }
           },
           fields: {
+            slug: module.fields.slug,
             gridType: module.fields.gridType,
             videoModule: module.fields.videoModule,
             products: products
